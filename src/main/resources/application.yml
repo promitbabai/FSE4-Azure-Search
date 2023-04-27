@@ -1,0 +1,88 @@
+server:
+  port: 8090
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: skill-tracker-search
+  data:
+    mongodb:
+      uri: mongodb+srv://promitbabai:Mamonbabai-1@cluster0.lpcdyxy.mongodb.net/test
+      database: FSE4
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+
+# MongoDB Local ost connection = uri: mongodb://localhost:27017
+
+
+
+# KAFKA Configutations
+#  kafka:
+#    topic:
+#      name: skilltrackertopic
+#    consumer:
+#      group-id: skilltracker
+#      bootstrap-servers: localhost:9092
+#      auto-offset-reset: earliest
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
+#      properties:
+#        spring:
+#          json:
+#            trusted:
+#              packages: *
+
+
+# EUREKA Discovery Server Configutations
+#eureka:
+#  client:
+#    instance:
+#      hostname: localhost
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
+#    registerWithEureka: true
+#    fetchRegistry: true
+#  instance:
+#    preferIpAddress: true
+
+
+# Circuit Breaker Configutations - Resilience4j
+resilience4j.circuitbreaker:
+  instances:
+    skilltrackermongo:
+      registerHealthIndicator: true
+      slidingWindowSize: 60
+      slidingWindowType: TIME_BASED
+      permittedNumberOfCallsInHalfOpenState: 3
+      minimumNumberOfCalls: 10
+      waitDurationInOpenState: 5s
+      slowCallRateThreshold: 100
+      slowCallDurationThreshold: 2000
+      failureRateThreshold: 50
+
+management:
+  endpoint:
+    health:
+      show-details: always         #To show all details in /health endpoint.
+
+  health:
+    circuitbreakers:
+      enabled: true #To show Circuit Breaker status
+
+springdoc:
+  api-docs:
+    path: /skill-tracker-api
+
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+
