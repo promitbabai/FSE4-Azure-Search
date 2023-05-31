@@ -8,20 +8,25 @@ spring:
   application:
     name: skill-tracker-search
 
-    # MongoDB Local Host connection = uri: mongodb://localhost:27017
-    # MongoDB On Atlas connection = uri: mongodb+srv://promitbabai:Mamonbabai-1@cluster0.lpcdyxy.mongodb.net/test
-    # MongoDB on Azure CosmosDB = uri: mongodb://fse4-cosmos-mongo:DE2rgYXMFLHi1AzXmXPKyFJMgzXb2NqN3VQeHfoJn0tCVKzaa5uW7RZ962ujBZZBIdGFDWgzJCK1ACDbQ29c2Q==@fse4-cosmos-mongo.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@fse4-cosmos-mongo@
-
   data:
     mongodb:
-      uri: mongodb+srv://promitbabai:Mamonbabai-1@cluster0.lpcdyxy.mongodb.net/test
+      uri: mongodb://fse4-cosmos-mongo:DE2rgYXMFLHi1AzXmXPKyFJMgzXb2NqN3VQeHfoJn0tCVKzaa5uW7RZ962ujBZZBIdGFDWgzJCK1ACDbQ29c2Q==@fse4-cosmos-mongo.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@fse4-cosmos-mongo@
       database: FSE4
   mvc:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: false
 
-# MongoDB Local ost connection = uri: mongodb://localhost:27017
+
+    # MongoDB Local Host connection = uri: mongodb://localhost:27017
+    # MongoDB On Atlas connection = uri: mongodb+srv://promitbabai:Mamonbabai-1@cluster0.lpcdyxy.mongodb.net/test
+    # MongoDB on Azure CosmosDB = uri: mongodb://fse4-cosmos-mongo:DE2rgYXMFLHi1AzXmXPKyFJMgzXb2NqN3VQeHfoJn0tCVKzaa5uW7RZ962ujBZZBIdGFDWgzJCK1ACDbQ29c2Q==@fse4-cosmos-mongo.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@fse4-cosmos-mongo@
+
+
+ #AZURE COSMOSDB COnection String
+  # spring.data.mongodb.database=fse4-cosmos-mongo
+  # spring.data.mongodb.uri=mongodb://fse4-cosmos-mongo:DE2rgYXMFLHi1AzXmXPKyFJMgzXb2NqN3VQeHfoJn0tCVKzaa5uW7RZ962ujBZZBIdGFDWgzJCK1ACDbQ29c2Q==@fse4-cosmos-mongo.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@fse4-cosmos-mongo@
+
 
 
 
