@@ -1,6 +1,8 @@
 package com.iiht.fse4.skilltrackersearch.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.iiht.fse4.skilltrackersearch.entity.Associate;
 import com.iiht.fse4.skilltrackersearch.entity.Skills;
 import com.iiht.fse4.skilltrackersearch.exception.AssociateNotfoundException;
@@ -26,11 +28,6 @@ public class AssociateService {
 
     @Autowired
     private AssociateRepository repo;
-
-    @Autowired
-    private ReceiveMessageFromAzureServiceBus azureServiceBus;
-
-
 
     private static final String RATING_SEARCH_VALUE = "10";
 
@@ -65,12 +62,6 @@ public class AssociateService {
 //            }
 //        }
         return sortAsPerExpertiseDescending(associateList);
-    }
-
-    public Associate getMessage() throws InterruptedException{
-        azureServiceBus.receiveMessage();
-        Associate data = new Associate();
-        return data;
     }
 
 
@@ -246,13 +237,36 @@ public class AssociateService {
     }
 
 
+
+    /**
+     * <p>This method saves the Associate Object recieved from the Command part of CQRS Pattern and saves into the
+     * Mongo DB
+     * </p>
+     * @param azureQueueMessage -  JSON Entity object recieved from Azure Service bus Queue
+     */
+    public void saveProfileFromCQRSAzureServiceBus(final String azureQueueMessage){
+        System.out.println("\n\n\n saveProfileFromCQRSAzureServiceBus - ");
+        Gson gson = new Gson();
+        Associate associate = gson.fromJson(azureQueueMessage, Associate.class);
+        try{
+            repo.save(associate);
+            log.info("AssociateRepository - SAVE from KAKFA to MongoDB");
+        }catch(Exception e){
+            log.error("Associate data could not be saved to MongoDB");
+            throw new MongoDBRepoSaveException();
+        }
+
+    }
+
+
+
     /**
      * <p>This method saves the Associate Object recieved from the Command part of CQRS Pattern and saves into the
      * Mongo DB
      * </p>
      * @param kafkaMessage -  JSON Entity object send from Angular UI to Maintain to here
      */
-    public void saveProfileFromCQRS(final KafkaMessage kafkaMessage){
+    public void saveProfileFromCQRSKafka(final KafkaMessage kafkaMessage){
         Associate associate = performModelTransformation(kafkaMessage.getProfile());
         if(kafkaMessage.getMongoOpsCode().equals("INSERT") || kafkaMessage.getMongoOpsCode().equals("UPDATE")){
             try{

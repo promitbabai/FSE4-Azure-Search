@@ -43,7 +43,7 @@ public class KafkaConsumer {
 //        LOGGER.info(String.format("Course event received in course-query service => %s", kafkaMessage.toString()));
 //        System.out.println("event++++++++++++++++++");
 //        System.out.println(kafkaMessage.getProfile().getName());
-//        service.saveProfileFromCQRS(kafkaMessage);
+//        service.saveProfileFromCQRSKafka(kafkaMessage);
 //    }
 
 

@@ -49,19 +49,6 @@ public class SearchController {
 
     }
 
-    /**
-     *
-     * @return - Return Value
-     */
-    @GetMapping("/getMessage")
-    public Associate getMessage() throws InterruptedException{
-        System.out.println("getMessage");
-        
-        Associate data = service.getMessage();
-        return data;
-
-    }
-
 
     /**
      *
