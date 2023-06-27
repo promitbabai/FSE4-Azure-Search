@@ -1,6 +1,6 @@
 package com.iiht.fse4.skilltrackersearch.service;
 
-//import com.google.common.collect.ComparisonChain;
+
 import com.iiht.fse4.skilltrackersearch.entity.Associate;
 import com.iiht.fse4.skilltrackersearch.entity.Skills;
 import com.iiht.fse4.skilltrackersearch.exception.AssociateNotfoundException;
@@ -9,6 +9,7 @@ import com.iiht.fse4.skilltrackersearch.exception.MongoDBRepoSaveException;
 import com.iiht.fse4.skilltrackersearch.kafkaconfig.KafkaMessage;
 import com.iiht.fse4.skilltrackersearch.model.Profile;
 import com.iiht.fse4.skilltrackersearch.repo.AssociateRepository;
+import com.iiht.fse4.skilltrackersearch.azureservicebus.ReceiveMessageFromAzureServiceBus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,11 @@ public class AssociateService {
 
     @Autowired
     private AssociateRepository repo;
+
+    @Autowired
+    private ReceiveMessageFromAzureServiceBus azureServiceBus;
+
+
 
     private static final String RATING_SEARCH_VALUE = "10";
 
@@ -58,10 +64,13 @@ public class AssociateService {
 //                System.out.println(skillObj.getTopic() + " - " + skillObj.getRating());
 //            }
 //        }
-
-
-
         return sortAsPerExpertiseDescending(associateList);
+    }
+
+    public Associate getMessage() throws InterruptedException{
+        azureServiceBus.receiveMessage();
+        Associate data = new Associate();
+        return data;
     }
 
 
@@ -243,20 +252,20 @@ public class AssociateService {
      * </p>
      * @param kafkaMessage -  JSON Entity object send from Angular UI to Maintain to here
      */
-//    public void saveProfileFromCQRS(final KafkaMessage kafkaMessage){
-//        Associate associate = performModelTransformation(kafkaMessage.getProfile());
-//        if(kafkaMessage.getMongoOpsCode().equals("INSERT") || kafkaMessage.getMongoOpsCode().equals("UPDATE")){
-//            try{
-//                repo.save(associate);
-//                log.info("AssociateRepository - SAVE from KAKFA to MongoDB");
-//            }catch(Exception e){
-//                log.error("Associate data could not be saved to MongoDB");
-//                throw new MongoDBRepoSaveException();
-//            }
-//
-//        }
-//
-//    }
+    public void saveProfileFromCQRS(final KafkaMessage kafkaMessage){
+        Associate associate = performModelTransformation(kafkaMessage.getProfile());
+        if(kafkaMessage.getMongoOpsCode().equals("INSERT") || kafkaMessage.getMongoOpsCode().equals("UPDATE")){
+            try{
+                repo.save(associate);
+                log.info("AssociateRepository - SAVE from KAKFA to MongoDB");
+            }catch(Exception e){
+                log.error("Associate data could not be saved to MongoDB");
+                throw new MongoDBRepoSaveException();
+            }
+
+        }
+
+    }
 
 
     /**

@@ -4,7 +4,7 @@
 
 The code included in this sample is intended to illustrate using Azure Cosmos DB for MongoDB API from SpringBoot application
 
-Search Microservices with Monggo DB Deployed on Azure with below 2 DB connection options -
+Azure-Search Microservices is Deployed on Azure with below 2 DB connection options -
     1) MongoDB Atlas Cloud connection
     2) CosmosDb for MongoDb Api on Azure,
 
@@ -14,7 +14,7 @@ Search Microservices with Monggo DB Deployed on Azure with below 2 DB connection
 
 
 1. Create a new database in your Azure Cosmos DB account.
- a. Create the Collection and Documents from the JSON data
+ a. Create the Collection and Documents from the JSON data files
 
 2. Clone this repository
 
@@ -25,7 +25,7 @@ Replace with the name of the database in your Azure Cosmos DB account.
             spring:
               data:
                 mongodb:
-                  uri: ##########   ( copy the value from PRIMARY CONNECTION STRING)
+                  uri: ##########   ( copy the value from PRIMARY AZURE COSMOSDB CONNECTION STRING)
                   database: ########
 
 OR

@@ -23,16 +23,32 @@ public class Profile implements Serializable {
 
     private String email;
 
+    private String lastupdated;
+
+    private String password;
+
+    private String role;
+
     private List<Skills> techskills;
 
     private List<Skills> nontechskills;
 
-    public Profile(String associateid, String name, String mobile, String email, List<Skills> techskills, List<Skills> nontechskills) {
+    public Profile(String associateid, String name, String mobile, String email, String lastupdated, String password, String role, List<Skills> techskills, List<Skills> nontechskills) {
         this.associateid = associateid;
         this.name = name;
         this.mobile = mobile;
         this.email = email;
+        this.lastupdated = lastupdated;
+        this.password = password;
+        this.role = role;
         this.techskills = techskills;
         this.nontechskills = nontechskills;
     }
+
+    public String toString()
+    {
+        return "\n\n PROFILE DATA\n" + associateid + " | " + name + " | " + mobile + " | " + email + " | "
+                + lastupdated + " | " + password + " | " + role;
+    }
+
 }

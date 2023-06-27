@@ -1,0 +1,65 @@
+{
+	"_id" : "CTS172280",
+	"name" : "Promit Babai Majumder",
+	"mobile" : "9051898881",
+	"email" : "promitm@skills.com",
+	"lastupdated": "10.10.2023",
+  	"password": "@#$%^\u0026*",
+  	"role": "USER",
+	"technical_skills" : [
+		{
+			"topic" : "html-css-js",
+			"rating" : "10"
+		},
+		{
+			"topic" : "docker",
+			"rating" : "9"
+		},
+		{
+			"topic" : "jenkins",
+			"rating" : "10"
+		},
+		{
+			"topic" : "react",
+			"rating" : "19"
+		},
+		{
+			"topic" : "spring",
+			"rating" : "19"
+		},
+		{
+			"topic" : "restful",
+			"rating" : "19"
+		},
+		{
+			"topic" : "hibernate",
+			"rating" : "19"
+		},
+		{
+			"topic" : "git",
+			"rating" : "18"
+		},
+		{
+			"topic" : "angular",
+			"rating" : "18"
+		},
+		{
+			"topic" : "aws",
+			"rating" : "18"
+		}
+	],
+	"non_technical_skills" : [
+		{
+			"topic" : "aptitude",
+			"rating" : "16"
+		},
+		{
+			"topic" : "communication",
+			"rating" : "15"
+		},
+		{
+			"topic" : "spoken",
+			"rating" : "15"
+		}
+	]
+}

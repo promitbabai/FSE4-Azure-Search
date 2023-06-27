@@ -24,6 +24,9 @@ public class Associate {
     private String name;
     private String mobile;
     private String email;
+    private String lastupdated;
+    private String password;
+    private String role;
     private List<Skills> technical_skills ;
     private List<Skills> non_technical_skills ;
 
@@ -57,6 +60,30 @@ public class Associate {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLastupdated() {
+        return lastupdated;
+    }
+
+    public void setLastupdated(String lastupdated) {
+        this.lastupdated = lastupdated;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public List<Skills> getTechnical_skills() {

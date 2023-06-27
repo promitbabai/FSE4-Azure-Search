@@ -17,6 +17,9 @@ spring:
   resources:
     add-mappings: false
 
+#  jms:
+#    servicebus:
+#      connection-string: Endpoint=sb://skill-tracker-service-bus.servicebus.windows.net/;SharedAccessKeyName=queue-policy;SharedAccessKey=qGTrNdBJeXrW08C27eninGOb2Hjq4pp9M+ASbDG6VVs=;EntityPath=update-record-in-search-queue
 
     # MongoDB Local Host connection = uri: mongodb://localhost:27017
     # MongoDB On Atlas connection = uri: mongodb+srv://promitbabai:Mamonbabai-1@cluster0.lpcdyxy.mongodb.net/test

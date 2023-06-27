@@ -46,6 +46,30 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--EITHER USE KAFKA OR AZURE SERVICE BUS -->
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-messaging-servicebus</artifactId>
+			<version>7.13.4</version>
+		</dependency>
+		<!--<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-mgmt-servicebus</artifactId>
+			<version>1.38.0</version>
+		</dependency>
+
+        <dependency>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-servicebus-jms</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>javax.jms-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>-->
+
+
         <!--<dependency>-->
             <!--<groupId>org.springframework.kafka</groupId>-->
             <!--<artifactId>spring-kafka</artifactId>-->
@@ -92,8 +116,16 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.azure.spring</groupId>
+				<artifactId>spring-cloud-azure-dependencies</artifactId>
+				<version>4.8.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 
 	<build>
 		<plugins>
