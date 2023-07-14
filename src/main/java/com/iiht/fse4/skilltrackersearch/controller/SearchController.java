@@ -56,14 +56,16 @@ public class SearchController {
      */
     @GetMapping("/getAssociatesByName")
     public List<Associate> getAssociatesByName(@RequestParam String name){
+        log.info("######### - Controller - getAssociatesByName");
         List<Associate> associateList = service.getAssociatesByName(name);
         return associateList;
     }
 
     @GetMapping("/getAssociateByID")
     //@CircuitBreaker(name = "skilltrackermongo", fallbackMethod = "getAssociateByIDFallback")
-    @CircuitBreaker(name = "skilltrackermongo")
+    //@CircuitBreaker(name = "skilltrackermongo")
     public Associate getAssociateByID(@RequestParam String associateID){
+        log.info("######### - Controller - getAssociateByID");
         Associate associateData = service.getAssociateByID(associateID);
         return associateData;
     }
@@ -78,6 +80,7 @@ public class SearchController {
 
     @GetMapping("/getAssociatesBySkill")
     public List<Associate> getAssociatesBySkill(@RequestParam String topic){
+        log.info("######### - Controller - getAssociatesBySkill");
         return service.getAssociatesBySkill(topic);
     }
 

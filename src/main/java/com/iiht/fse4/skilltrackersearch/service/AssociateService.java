@@ -174,6 +174,8 @@ public class AssociateService {
     }
 
     public List<Associate> getAssociatesByName(final String nameFromUI){
+        log.info("######### - Service Layer - getAssociatesByName");
+        log.info("######### - Searching For  - " + nameFromUI);
         List<Associate> filteredAssociateList = new ArrayList<Associate>();
         StringBuilder nameInitials = new StringBuilder();
         if(nameFromUI.length()>4){
@@ -208,6 +210,7 @@ public class AssociateService {
                 }
             }
         }
+        log.info("######### - Data Recieved  - " + filteredAssociateList);
         return filteredAssociateList;
     }
 
