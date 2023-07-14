@@ -1,37 +1,34 @@
 package com.iiht.fse4.skilltrackersearch.repo;
 
-import com.iiht.fse4.skilltrackersearch.entity.Associate;
-
-import org.springframework.data.mongodb.core.query.Criteria;
+import com.iiht.fse4.skilltrackersearch.model.Profile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface AssociateRepository extends MongoRepository<Associate, String> {
+public interface ProfileRepository extends MongoRepository<Profile, String> {
 
-   // @Autowired
-   // MongoTemplate mt;
+    // @Autowired
+    // MongoTemplate mt;
 
-    public Associate findByName(String firstName);
+    public Profile findByName(String firstName);
 
-    public Associate findByAssociateid(String associateId);
+    public Profile findByAssociateid(String associateId);
 
-    public List<Associate> findByOrderByAssociateidAsc();
+    public List<Profile> findByOrderByAssociateidAsc();
 
-    public List<Associate> findByOrderByAssociateidDesc();
+    public List<Profile> findByOrderByAssociateidDesc();
 
-    public List<Associate> findByOrderByNameAsc();
+    public List<Profile> findByOrderByNameAsc();
 
-    public List<Associate> findByOrderByNameDesc();
+    public List<Profile> findByOrderByNameDesc();
 
 
     @Query("{name : ?0}") // SQL Equivalent : SELECT * FROM ASSOCIATES where name = ?
-    List<Associate> getAssociatesByName(String name);
+    List<Profile> getAssociatesByName(String name);
 
     @Query(value = "{ 'technical_skills': { $elemMatch: {'topic' :?0, $elemMatch: {'rating' : {$gt : 10}} } }")
-    public List<Associate> getAssociateBySkill(String topic );
+    public List<Profile> getAssociateBySkill(String topic );
 
 
 
@@ -105,6 +102,7 @@ public interface AssociateRepository extends MongoRepository<Associate, String> 
 //    //------------------MongoDB Regular Expressions--------------------------------------
 //    @Query("{ author : { $regex : ?0 } }")
 //    List<Book> getBooksByAuthorRegEx(String author);
+
 
 
 }

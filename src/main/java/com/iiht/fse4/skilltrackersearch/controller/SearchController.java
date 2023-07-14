@@ -1,7 +1,7 @@
 package com.iiht.fse4.skilltrackersearch.controller;
 
-import com.iiht.fse4.skilltrackersearch.entity.Associate;
 import com.iiht.fse4.skilltrackersearch.exception.AssociateNotfoundException;
+import com.iiht.fse4.skilltrackersearch.model.Profile;
 import com.iiht.fse4.skilltrackersearch.service.AssociateService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
@@ -27,12 +27,10 @@ public class SearchController {
      * @return - Return Value
      */
     @GetMapping("/getAllAssociates")
-    public List<Associate> getAllAssociates(){
-        List<Associate> associateList = service.getAllAssociates();
+    public List<Profile> getAllAssociates(){
+        List<Profile> associateList = service.getAllAssociates();
         log.info("Sending data back to the Browser");
         return associateList;
-
-
     }
 
 
@@ -41,10 +39,10 @@ public class SearchController {
      * @return - Return Value
      */
     @GetMapping("/getAllAssociatesOrderBySort")
-    public List<Associate> getAllAssociatesOrderBySort(@RequestParam String orderby, @RequestParam String sort){
+    public List<Profile> getAllAssociatesOrderBySort(@RequestParam String orderby, @RequestParam String sort){
         System.out.println("getAllAssociatesOrderBySort");
         System.out.println("OrderBy="+orderby + " | Sort=" + sort);
-        List<Associate> associateList = service.getAllAssociatesOrderBySort(orderby, sort);
+        List<Profile> associateList = service.getAllAssociatesOrderBySort(orderby, sort);
         return associateList;
 
     }
@@ -55,31 +53,31 @@ public class SearchController {
      * @return - Return Value
      */
     @GetMapping("/getAssociatesByName")
-    public List<Associate> getAssociatesByName(@RequestParam String name){
+    public List<Profile> getAssociatesByName(@RequestParam String name){
         log.info("######### - Controller - getAssociatesByName");
-        List<Associate> associateList = service.getAssociatesByName(name);
+        List<Profile> associateList = service.getAssociatesByName(name);
         return associateList;
     }
 
     @GetMapping("/getAssociateByID")
     //@CircuitBreaker(name = "skilltrackermongo", fallbackMethod = "getAssociateByIDFallback")
     //@CircuitBreaker(name = "skilltrackermongo")
-    public Associate getAssociateByID(@RequestParam String associateID){
+    public Profile getAssociateByID(@RequestParam String associateID){
         log.info("######### - Controller - getAssociateByID");
-        Associate associateData = service.getAssociateByID(associateID);
-        return associateData;
+        Profile data = service.getAssociateByID(associateID);
+        return data;
     }
 
-    public Associate getAssociateByIDFallback(Exception e){
+    public Profile getAssociateByIDFallback(Exception e){
         //log.error("getAPIFallBack::{}", e);
         System.out.println("\n\n Normal Get returned Null- Triggering getAssociateByIDFallback");
-        Associate associate = new Associate();
-        return associate;
+        Profile profile = new Profile();
+        return profile;
     }
 
 
     @GetMapping("/getAssociatesBySkill")
-    public List<Associate> getAssociatesBySkill(@RequestParam String topic){
+    public List<Profile> getAssociatesBySkill(@RequestParam String topic){
         log.info("######### - Controller - getAssociatesBySkill");
         return service.getAssociatesBySkill(topic);
     }

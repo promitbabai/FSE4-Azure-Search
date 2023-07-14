@@ -1,3 +1,4 @@
+/*
 package com.iiht.fse4.skilltrackersearch.entity;
 
 
@@ -7,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 
+*/
 /**
  * The Associate is a model class which holds the data sent from the Angular UI,
  * to be persisted onto the Mongodb
@@ -14,7 +16,8 @@ import java.util.List;
  * @author  Promit Majumder
  * @version 1.0
  * @since   2023-01-10
- */
+ *//*
+
 
 @Document("ASSOCIATE")
 public class Associate {
@@ -102,3 +105,4 @@ public class Associate {
         this.non_technical_skills = non_technical_skills;
     }
 }
+*/

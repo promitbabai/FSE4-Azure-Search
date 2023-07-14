@@ -1,23 +1,22 @@
 package com.iiht.fse4.skilltrackersearch.service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.iiht.fse4.skilltrackersearch.entity.Associate;
-import com.iiht.fse4.skilltrackersearch.entity.Skills;
+//import com.iiht.fse4.skilltrackersearch.entity.Associate;
+//import com.iiht.fse4.skilltrackersearch.entity.Skills;
 import com.iiht.fse4.skilltrackersearch.exception.AssociateNotfoundException;
 import com.iiht.fse4.skilltrackersearch.exception.AssociateNotfoundForGivenSkillException;
 import com.iiht.fse4.skilltrackersearch.exception.MongoDBRepoSaveException;
-import com.iiht.fse4.skilltrackersearch.kafkaconfig.KafkaMessage;
+//import com.iiht.fse4.skilltrackersearch.kafkaconfig.KafkaMessage;
 import com.iiht.fse4.skilltrackersearch.model.Profile;
-import com.iiht.fse4.skilltrackersearch.repo.AssociateRepository;
-import com.iiht.fse4.skilltrackersearch.azureservicebus.ReceiveMessageFromAzureServiceBus;
+import com.iiht.fse4.skilltrackersearch.model.SkillsFromUI;
+//import com.iiht.fse4.skilltrackersearch.repo.AssociateRepository;
+import com.iiht.fse4.skilltrackersearch.repo.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,13 +26,14 @@ import java.util.stream.Collectors;
 public class AssociateService {
 
     @Autowired
-    private AssociateRepository repo;
+    private ProfileRepository repo;
+    //private AssociateRepository repo;
 
     private static final String RATING_SEARCH_VALUE = "10";
 
 
-    public Associate getAssociateById(final String associateId){
-        Associate data = null;
+    public Profile getAssociateById(final String associateId){
+        Profile data = null;
         data = repo.findByAssociateid(associateId);
         if(null == data){
             log.warn("Associate data not found with given ID");
@@ -45,88 +45,37 @@ public class AssociateService {
     }
 
 
-    public List<Associate> getAllAssociates (){
-        List<Associate> associateList =  repo.findAll();
+    public List<Profile> getAllAssociates (){
+        List<Profile> associateList =  repo.findAll();
         if(null == associateList){
             log.warn("Associate data not loaded");
             throw new AssociateNotfoundException();
         }else{
             log.info("Associate data found");
         }
-
-//        System.out.println("Printing before Sorting");
-//        for(Associate associate : associateList){
-//            System.out.println(associate.getName());
-//            for(Skills skillObj : associate.getTechnical_skills()){
-//                System.out.println(skillObj.getTopic() + " - " + skillObj.getRating());
-//            }
-//        }
         return sortAsPerExpertiseDescending(associateList);
     }
 
 
-    private List<Associate> sortAsPerExpertiseDescending(List<Associate> associateList){
+    private List<Profile> sortAsPerExpertiseDescending(List<Profile> associateList){
 
-        for(Associate associateObj : associateList){
+        for(Profile data : associateList){
 
             System.out.println("\n\n\n\n ##################");
-            System.out.println("New Row Data = " + associateObj.getName());
-            List<Skills> unSortedSkillsList = associateObj.getTechnical_skills();
+            System.out.println("New Row Data = " + data.getName());
+            List<SkillsFromUI> unSortedSkillsList = data.getTechskills();
             unSortedSkillsList.stream().forEach(skillObj -> System.out.println(skillObj.getTopic() + " - " + skillObj.getRating()));
 
-            Comparator<Skills> skillsComparatorLEx = (s1, s2) -> s1.getRating().compareTo(s2.getRating());
+            Comparator<SkillsFromUI> skillsComparatorLEx = (s1, s2) -> s1.getRating().compareTo(s2.getRating());
 
-            List<Skills> sortedSkillList = unSortedSkillsList.stream().sorted(skillsComparatorLEx).collect(Collectors.toList());
+            List<SkillsFromUI> sortedSkillList = unSortedSkillsList.stream().sorted(skillsComparatorLEx).collect(Collectors.toList());
 
             System.out.println("---------- AFTER SORT OPERATION -------------------");
 //            // print new list to console using forEach()
             sortedSkillList.stream().forEach(skillObj -> System.out.println(skillObj.getTopic() + " - " + skillObj.getRating()));
 
-//            for(Skills skillObj : unSortedSkillsList){
-//                System.out.println(skillObj.getTopic() + " - " + skillObj.getRating());
-//            }
-
-
-
-
-
-//            Collections.sort(unSortedSkillsList, new Comparator<>() {
-//                @Override
-//                public int compare(Skills o1, Skills o2) {
-//                    return ComparisonChain.start()
-//                            .compare(o1.getRating(), o2.getRating())
-//                            .result();
-//                }
-//            });
-
-
-//            Collections.sort(unSortedSkillsList, new Comparator<>() {
-//                @Override public int compare(Skills o1, Skills o2) {
-//                    return (o1.getRating().compareTo((o2.getRating())));
-//
-//                }
-//            });
-
-
-//            // sorting on multiple fields (3-level) using Lambda expression
-//            List<Skills> sortedCustomerList = unsortedCustomerList
-//                    .stream()
-//                    .sorted(
-//                            nameComparatorLEx // 1st compare Name
-//                                    .thenComparing(cityComparatorLEx) // then 2nd compare City
-//                                    .thenComparing(skillsComparatorLEx)) // then 3rd compare Age
-//                    .collect(Collectors.toList()); // collect sorted customers to new list
-//
-
-
-//            System.out.println("---------- AFTER SORT OPERATION -------------------");
-//            //unSortedSkillsList.sort(Comparator.comparing(Skills::getRating).reversed());
-//            for(Skills skillObj : unSortedSkillsList){
-//                System.out.println(skillObj.getTopic() + " - " + skillObj.getRating());
-//            }
-
             System.out.println("\n\n\n----------END OF DATA----------------- \n\n\n");
-            associateObj.setTechnical_skills(sortedSkillList);
+            data.setTechskills(sortedSkillList);
         }
         return associateList;
 
@@ -137,10 +86,10 @@ public class AssociateService {
 
 
 
-    public List<Associate> getAllAssociatesOrderBySort (final String orderby, final String sort){
+    public List<Profile> getAllAssociatesOrderBySort (final String orderby, final String sort){
 
 
-        List<Associate> associateList = new ArrayList<Associate>();
+        List<Profile> associateList = new ArrayList<Profile>();
         if(orderby.equals("name")&& sort.equals("asc")){
            associateList = repo.findByOrderByNameAsc();
         }
@@ -162,21 +111,21 @@ public class AssociateService {
         return associateList;
     }
 
-    public Associate getAssociateByID (final String associateId){
-        Associate associate =  repo.findByAssociateid(associateId);
-        if(null == associate){
+    public Profile getAssociateByID (final String associateId){
+        Profile data =  repo.findByAssociateid(associateId);
+        if(null == data){
             log.error("Associate data not found with given ID");
             throw new AssociateNotfoundException();
         }else{
             log.info("Associate data found with given ID");
         }
-        return associate;
+        return data;
     }
 
-    public List<Associate> getAssociatesByName(final String nameFromUI){
+    public List<Profile> getAssociatesByName(final String nameFromUI){
         log.info("######### - Service Layer - getAssociatesByName");
         log.info("######### - Searching For  - " + nameFromUI);
-        List<Associate> filteredAssociateList = new ArrayList<Associate>();
+        List<Profile> filteredAssociateList = new ArrayList<Profile>();
         StringBuilder nameInitials = new StringBuilder();
         if(nameFromUI.length()>4){
             filteredAssociateList =  repo.getAssociatesByName(nameFromUI);
@@ -185,7 +134,7 @@ public class AssociateService {
                 throw new AssociateNotfoundException();
             }
         }else{
-            List<Associate> allAssociateList =  repo.findAll();
+            List<Profile> allAssociateList =  repo.findAll();
             if(null == allAssociateList){
                 log.error("Associate not found with given name");
                 throw new AssociateNotfoundException();
@@ -193,7 +142,7 @@ public class AssociateService {
                 log.info("Associate found with given name");
             }
 
-            for(Associate associate : allAssociateList){
+            for(Profile associate : allAssociateList){
                 String associateName = associate.getName();
                 String[] nameInitialsArray = associateName.split(" ");
 
@@ -215,19 +164,19 @@ public class AssociateService {
     }
 
 
-    public List<Associate> getAssociatesBySkill(final String topic){
+    public List<Profile> getAssociatesBySkill(final String topic){
         System.out.println("\n\n\n getAssociatesBySkill - " + topic);
         //List<Associate> associateList = repo.getAssociateBySkill(topic);
-        List<Associate> associateList =  repo.findAll();
+        List<Profile> associateList =  repo.findAll();
         if(null == associateList){
             log.warn("Associate not found with given Skillset");
             throw new AssociateNotfoundForGivenSkillException();
         }else{
             log.info("Associate found with given Skillset");
         }
-        List<Associate> filteredAssociateList = new ArrayList<Associate>();
-        for(Associate data : associateList){
-            for(Skills skill : data.getTechnical_skills()){
+        List<Profile> filteredAssociateList = new ArrayList<Profile>();
+        for(Profile data : associateList){
+            for(SkillsFromUI skill : data.getTechskills()){
                 if(topic.equals(skill.getTopic())){
                     int rating = Integer.parseInt(skill.getRating());
                     if(rating > 10){
@@ -250,10 +199,12 @@ public class AssociateService {
     public void saveProfileFromCQRSAzureServiceBus(final String azureQueueMessage){
         System.out.println("\n\n\n saveProfileFromCQRSAzureServiceBus - ");
         Gson gson = new Gson();
-        Associate associate = gson.fromJson(azureQueueMessage, Associate.class);
+        Profile profile = gson.fromJson(azureQueueMessage, Profile.class);
+
+        //Associate associate = gson.fromJson(azureQueueMessage, Associate.class);
         try{
-            repo.save(associate);
-            log.info("AssociateRepository - SAVE from KAKFA to MongoDB");
+            repo.save(profile);
+            log.info("AssociateRepository - SAVE from AZURE SERVICE BUS to MongoDB");
         }catch(Exception e){
             log.error("Associate data could not be saved to MongoDB");
             throw new MongoDBRepoSaveException();
@@ -269,8 +220,8 @@ public class AssociateService {
      * </p>
      * @param kafkaMessage -  JSON Entity object send from Angular UI to Maintain to here
      */
-    public void saveProfileFromCQRSKafka(final KafkaMessage kafkaMessage){
-        Associate associate = performModelTransformation(kafkaMessage.getProfile());
+   /* public void saveProfileFromCQRSKafka(final KafkaMessage kafkaMessage){
+        Profile associate = performModelTransformation(kafkaMessage.getProfile());
         if(kafkaMessage.getMongoOpsCode().equals("INSERT") || kafkaMessage.getMongoOpsCode().equals("UPDATE")){
             try{
                 repo.save(associate);
@@ -282,7 +233,7 @@ public class AssociateService {
 
         }
 
-    }
+    }*/
 
 
     /**
@@ -292,7 +243,7 @@ public class AssociateService {
      * @param profile -  JSON Entity object send from Angular UI to Maintain to here
      * @return associate - the Entity object to be peristed into MongoDB
      */
-    private Associate performModelTransformation (final Profile profile){
+    /*private Associate performModelTransformation (final Profile profile){
         Associate associate = new Associate();
         associate.setAssociateid(profile.getAssociateid());
         associate.setName(profile.getName());
@@ -302,6 +253,6 @@ public class AssociateService {
         associate.setNon_technical_skills(profile.getNontechskills());
         return associate;
 
-    }
+    }*/
 
 }
