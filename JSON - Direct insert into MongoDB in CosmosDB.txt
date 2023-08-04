@@ -1,0 +1,78 @@
+{
+	"_id" : "CTS172280",
+	"name" : "Promit Babai Majumder",
+	"mobile" : "9051898881",
+	"email" : "promitm@skills.com",
+	"lastupdated": "10.10.2023",
+  	"password": "@#$%^\u0026*",
+  	"role": "USER",
+	 "techskills": [
+    {
+      "skillId": "T001",
+      "topic": "html-css-js",
+      "rating": "20"
+    },
+    {
+      "skillId": "T002",
+      "topic": "angular",
+      "rating": "19"
+    },
+    {
+      "skillId": "T003",
+      "topic": "react",
+      "rating": "19"
+    },
+    {
+      "skillId": "T004",
+      "topic": "spring",
+      "rating": "19"
+    },
+    {
+      "skillId": "T005",
+      "topic": "restful",
+      "rating": "19"
+    },
+    {
+      "skillId": "T006",
+      "topic": "hibernate",
+      "rating": "19"
+    },
+    {
+      "skillId": "T007",
+      "topic": "git",
+      "rating": "19"
+    },
+    {
+      "skillId": "T008",
+      "topic": "docker",
+      "rating": "20"
+    },
+    {
+      "skillId": "T009",
+      "topic": "jenkins",
+      "rating": "19"
+    },
+    {
+      "skillId": "T010",
+      "topic": "aws",
+      "rating": "19"
+    }
+  ],
+  "nontechskills": [
+    {
+      "skillId": "N001",
+      "topic": "spoken",
+      "rating": "20"
+    },
+    {
+      "skillId": "N002",
+      "topic": "communication",
+      "rating": "20"
+    },
+    {
+      "skillId": "N003",
+      "topic": "aptitude",
+      "rating": "19"
+    }
+  ]
+}

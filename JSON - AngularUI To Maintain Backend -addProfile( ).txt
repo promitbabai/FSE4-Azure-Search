@@ -1,0 +1,160 @@
+
+Data sent from SKILLTRACKER UI to Maintain Backend - addProfile()
+
+
+{
+  "associateid": "CTS100009",
+  "name": "Meeta Majumder",
+  "mobile": "9836982678",
+  "email": "promitbabai@yahoo.com",
+  "password": "TWFtb25iYWJhaS0x",
+  "techskills": [
+    {
+      "skillId": "T001",
+      "topic": "html-css-js",
+      "rating": "15"
+    },
+    {
+      "skillId": "T002",
+      "topic": "angular",
+      "rating": "16"
+    },
+    {
+      "skillId": "T003",
+      "topic": "react",
+      "rating": "16"
+    },
+    {
+      "skillId": "T004",
+      "topic": "spring",
+      "rating": "14"
+    },
+    {
+      "skillId": "T005",
+      "topic": "restful",
+      "rating": "16"
+    },
+    {
+      "skillId": "T006",
+      "topic": "hibernate",
+      "rating": "16"
+    },
+    {
+      "skillId": "T007",
+      "topic": "git",
+      "rating": "16"
+    },
+    {
+      "skillId": "T008",
+      "topic": "docker",
+      "rating": "16"
+    },
+    {
+      "skillId": "T009",
+      "topic": "jenkins",
+      "rating": "16"
+    },
+    {
+      "skillId": "T010",
+      "topic": "aws",
+      "rating": "16"
+    }
+  ],
+  "nontechskills": [
+    {
+      "skillId": "N001",
+      "topic": "spoken",
+      "rating": "18"
+    },
+    {
+      "skillId": "N002",
+      "topic": "communication",
+      "rating": "17"
+    },
+    {
+      "skillId": "N003",
+      "topic": "aptitude",
+      "rating": "18"
+    }
+  ]
+}
+
+//--------------------------------------------
+
+
+{
+  "associateid": "CTS100008",
+  "name": "Pradip Majumder",
+  "mobile": "9830305022",
+  "email": "promitbabai@yahoo.com",
+  "password": "TWFtb25iYWJhaS0x",
+  "techskills": [
+    {
+      "skillId": "T001",
+      "topic": "html-css-js",
+      "rating": "15"
+    },
+    {
+      "skillId": "T002",
+      "topic": "angular",
+      "rating": "16"
+    },
+    {
+      "skillId": "T003",
+      "topic": "react",
+      "rating": "16"
+    },
+    {
+      "skillId": "T004",
+      "topic": "spring",
+      "rating": "14"
+    },
+    {
+      "skillId": "T005",
+      "topic": "restful",
+      "rating": "16"
+    },
+    {
+      "skillId": "T006",
+      "topic": "hibernate",
+      "rating": "16"
+    },
+    {
+      "skillId": "T007",
+      "topic": "git",
+      "rating": "16"
+    },
+    {
+      "skillId": "T008",
+      "topic": "docker",
+      "rating": "16"
+    },
+    {
+      "skillId": "T009",
+      "topic": "jenkins",
+      "rating": "16"
+    },
+    {
+      "skillId": "T010",
+      "topic": "aws",
+      "rating": "16"
+    }
+  ],
+  "nontechskills": [
+    {
+      "skillId": "N001",
+      "topic": "spoken",
+      "rating": "18"
+    },
+    {
+      "skillId": "N002",
+      "topic": "communication",
+      "rating": "17"
+    },
+    {
+      "skillId": "N003",
+      "topic": "aptitude",
+      "rating": "18"
+    }
+  ]
+}

@@ -26,7 +26,7 @@ public class ReceiveMessageFromAzureServiceBus {
     public String QUEUE_NAME = "update-record-in-search-queue";
 
     // Method To trigger the scheduler every one minute
-    @Scheduled(fixedDelay = 60000)
+    //@Scheduled(fixedDelay = 60000)
     public void receiveMessage() throws InterruptedException {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
