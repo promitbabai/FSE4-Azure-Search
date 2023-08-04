@@ -10,7 +10,7 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://fse4-cosmos-mongo:DE2rgYXMFLHi1AzXmXPKyFJMgzXb2NqN3VQeHfoJn0tCVKzaa5uW7RZ962ujBZZBIdGFDWgzJCK1ACDbQ29c2Q==@fse4-cosmos-mongo.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@fse4-cosmos-mongo@
+      uri: mongodb://mongodbapi:pUF0Sr2kqauk05LZaMWuSqaOUyLFr3ysB2hAETw1ehWSnrVEDT2Qg4foHO3MiuaP9SfcBaOu5wh0ACDb69i3lg==@mongodbapi.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@mongodbapi@
       database: FSE4
   mvc:
     throw-exception-if-no-handler-found: true
